@@ -1,8 +1,6 @@
 package cq.game.models;
 
-
 import cq.game.models.path.Path;
-
 public class Order {
 
     private Path path;

@@ -14,16 +14,26 @@ public abstract class Unit {
 
     public static Unit byType(UnitType type)  {
         if (type.equals(UnitType.ARCHER))   {
-            return new Archer();
+			Archer archer = new Archer();
+			archer.setSpeed(10);
+			archer.setPointFactor(12);
+			return archer;
         }
         if (type.equals(UnitType.SPEARMAN))   {
-            return new Spearman();
+			Spearman spearman = new Spearman();
+			spearman.setSpeed(10);
+			spearman.setPointFactor(8);
+			return spearman;
         }
         if (type.equals(UnitType.HORSEMAN))   {
-            return new Horseman();
+			Horseman horseman = new Horseman();
+			horseman.setSpeed(20);
+			horseman.setPointFactor(8);
+			return horseman;
         }
-        return null;
+        throw new RuntimeException();
     }
+
     public String getName(){
         return this.name;
     }
