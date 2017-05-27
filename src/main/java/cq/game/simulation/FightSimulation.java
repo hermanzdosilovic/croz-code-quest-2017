@@ -2,11 +2,16 @@ package cq.game.simulation;
 
 import cq.game.models.Unit;
 import cq.game.models.enums.UnitType;
-
 import java.util.List;
 
 public class FightSimulation {
-    public static void fight(List<Unit> myUnits, List<Unit> enemyUnits) {
+
+	/**
+	 * 0 -> all dead.
+	 * -1 -> they won
+	 * 1-> I won
+	 */
+	public static FightResult fight(List<Unit> myUnits, List<Unit> enemyUnits) {
         double archers1 = countByType(myUnits, UnitType.ARCHER);
         double horsemen1 = countByType(myUnits, UnitType.HORSEMAN);
         double spearmen1 = countByType(myUnits, UnitType.SPEARMAN);
@@ -27,14 +32,12 @@ public class FightSimulation {
                 horsemen2 * (1 + archers1 / total1) * Math.max(Math.pow(spearmen2 + 0.25, 0.2), 1);
 
         if (factor1 == factor2) {
-            System.err.println("They're all dead");
+            return new FightResult(false, true, 0,0,0);
         }
 
         if (factor1 == 0 || factor2 == 0) {
-            System.err.println("Everyone is alive");
+			return new FightResult(false, true, 0,0,0);
         }
-
-
         if (factor1 > factor2) {
             double survivorratio = (factor1 - factor2 * factor2 / factor1) / factor1;
             System.err.println("Survivor ratio: " + survivorratio);
@@ -57,12 +60,7 @@ public class FightSimulation {
                 if (sv > av && sv > hv)
                     spearmen1r = 1;
             }
-            archers1 = archers1r;
-            spearmen1 = spearmen1r;
-            horsemen1 = horsemen1r;
-            archers2 = 0;
-            spearmen2 = 0;
-            horsemen2 = 0;
+            return new FightResult(true, false, (int)horsemen1, (int)archers1, (int)spearmen1);
         } else {
             double survivorratio = (factor2 - factor1 * factor1 / factor2) / factor2;
             System.err.println("Survivor ratio: " + survivorratio);
@@ -85,12 +83,7 @@ public class FightSimulation {
                 if (sv > av && sv > hv)
                     spearmen2r = 1;
             }
-            archers1 = 0;
-            spearmen1 = 0;
-            horsemen1 = 0;
-            archers2 = archers2r;
-            spearmen2 = spearmen2r;
-            horsemen2 = horsemen2r;
+			return new FightResult(false, false, (int)horsemen2, (int)archers2, (int)spearmen2);
         }
     }
 
@@ -103,4 +96,40 @@ public class FightSimulation {
         }
         return counter;
     }
+    public static class FightResult {
+		private final boolean won;
+		private final boolean draw;
+		private final int h;
+		private final int a;
+		private final int s;
+
+
+		public FightResult(boolean won, boolean draw, int h, int a, int s) {
+			this.won = won;
+			this.draw = draw;
+			this.h = h;
+			this.a = a;
+			this.s = s;
+		}
+
+		public boolean isWon() {
+			return won;
+		}
+
+		public int getH() {
+			return h;
+		}
+
+		public int getA() {
+			return a;
+		}
+
+		public int getS() {
+			return s;
+		}
+
+		public boolean isDraw() {
+			return draw;
+		}
+	}
 }
