@@ -5,6 +5,7 @@ import cq.game.api.GameStateWriter;
 import cq.game.api.InputGameState;
 import cq.game.bots.Bot;
 import cq.game.bots.CompositeBot;
+import cq.game.bots.CreationBot;
 import cq.game.bots.MovingBot;
 import java.io.IOException;
 
@@ -12,7 +13,8 @@ import java.io.IOException;
 public class Main {
 
 	private static final Bot[] BOTS = {
-		new MovingBot()
+		new MovingBot(),
+		new CreationBot()
 	};
 
     private static GameStateReader gameStateReader = new GameStateReader();
