@@ -3,10 +3,11 @@ package cq.game;
 import cq.game.api.GameStateReader;
 import cq.game.api.GameStateWriter;
 import cq.game.api.InputGameState;
-import cq.game.bots.*;
-
+import cq.game.bots.Bot;
 import java.io.IOException;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class Main {
     private static GameStateReader gameStateReader = new GameStateReader();
     private static GameStateWriter gameStateWriter = new GameStateWriter();
@@ -24,6 +25,5 @@ public class Main {
             gameStateWriter = bot.generateOrders(gameState, gameStateWriter);
             gameStateWriter.write();
         }
-
-    }
+	}
 }
