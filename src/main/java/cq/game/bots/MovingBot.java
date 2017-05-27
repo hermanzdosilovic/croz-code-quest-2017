@@ -15,13 +15,20 @@ import java.util.List;
  */
 public class MovingBot implements Bot {
 
-    @Override
-    public GameStateWriter generateOrders(InputGameState state, GameStateWriter gsw) {
-        BaseStats base = state.getMyBase();
-        moveFromBase(gsw, base);
-        moveHorsemen(state, gsw);
-        return gsw;
-    }
+	@Override
+	public GameStateWriter generateOrders(InputGameState state, GameStateWriter gsw) {
+		state.getMyUnits().forEach(unit -> {
+			if (unit.getPath() == null) {
+				unit.setOrder(new Order(CQPaths.SHORT, 0));
+				gsw.addUnitOnPath(unit);
+			} else {
+				int offset = unit.getOffset();
+				int move = Math.min(unit.getSpeed(), unit.getPath().getLength()  - offset);
+				unit.setOrder(new Order(unit.getPath(), move + offset));
+			}
+		});
+		return gsw;
+	}
 
     private void moveHorsemen(InputGameState state, GameStateWriter gsw) {
         List<Unit> movingUnits = state.getMovingUnits();
