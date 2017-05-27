@@ -17,9 +17,9 @@ import java.io.IOException;
 public class Main {
 
 	private static final Bot[] BOTS = {
-		new MovingBot(new AttactMovingStrategy()),
 		new CreationBot(new CreateStrategyRandom()),
-		new AddOnPathBot(new AddToPathRandom())
+		new AddOnPathBot(new AddToPathRandom()),
+		new MovingBot(new AttactMovingStrategy())
 	};
 
     private static GameStateReader gameStateReader = new GameStateReader();
@@ -29,8 +29,11 @@ public class Main {
         Bot bot =new CompositeBot(BOTS);
         while(true) {
             InputGameState gameState = gameStateReader.nextState();
-            gameStateWriter = bot.generateOrders(gameState, gameStateWriter);
-            gameStateWriter.write();
+			long s = System.currentTimeMillis();
+			gameStateWriter = bot.generateOrders(gameState, gameStateWriter);
+			long e = System.currentTimeMillis();
+			System.err.println("Time took: " + (e-s));
+			gameStateWriter.write();
         }
 	}
 }

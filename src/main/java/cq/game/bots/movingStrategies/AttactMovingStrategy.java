@@ -51,8 +51,9 @@ public class AttactMovingStrategy implements MovingStrategy {
 				// Move all upfront -> not one of th path
 				unitsAtPosition.forEach(unit -> {
 					int maxMove = path.getLength() - position;
-					int move = Math.min(unit.getSpeed(), maxMove);
-					unit.setOrder(new Order(path, move + position));
+					int move = Math.min(10, maxMove);
+
+					unit.setOrder(new Order(path, Math.max(0, move + position)));
 					newUnits.add(unit);
 				});
 				return;
@@ -73,29 +74,31 @@ public class AttactMovingStrategy implements MovingStrategy {
 				if (result.isWon()) {
 					if (positions.size() == 2) {
 						unitsAtPosition.forEach(unit -> {
-							unit.setOrder(new Order(path, positions.get(1)));
+							// Move to the position of the emeny troops.
+							int pos = Math.min(position + 10, positions.get(1));
+							unit.setOrder(new Order(path, Math.max(0, pos)));
 							newUnits.add(unit);
 						});
 					} else {
 						unitsAtPosition.forEach(unit -> {
 							int maxMove = path.getLength() - position;
-							int move = Math.min(unit.getSpeed(), maxMove);
-							unit.setOrder(new Order(path, move + position));
+							int move = Math.min(10, maxMove);
+							unit.setOrder(new Order(path,  Math.max(0, move + position)));
 							newUnits.add(unit);
 						});
 					}
 				} else {
 					// Do not move any units.
 					unitsAtPosition.forEach(unit -> {
-						unit.setOrder(new Order(path, unit.getOffset()));
+						unit.setOrder(new Order(path,  Math.max(0, unit.getOffset())));
 						newUnits.add(unit);
 					});
 				}
 			} else {
 				unitsAtPosition.forEach(unit -> {
 					int maxMove = path.getLength() - position;
-					int move = Math.min(unit.getSpeed(), maxMove);
-					unit.setOrder(new Order(path, move + position));
+					int move = Math.min(10, maxMove);
+					unit.setOrder(new Order(path, Math.max(0, move + position)));
 					newUnits.add(unit);
 				});
 			}
