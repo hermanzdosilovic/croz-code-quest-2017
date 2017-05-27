@@ -16,9 +16,8 @@ public class MovingBot implements Bot {
 
 	@Override
 	public GameStateWriter generateOrders(InputGameState state, GameStateWriter gsw) {
-		BaseStats base = state.getMyBase();
 		state.getMyUnits().forEach(unit -> {
-			if (unit.getOffset() == 0) {
+			if (unit.getPath() == null) {
 				unit.setOrder(new Order(CQPaths.SHORT, 0));
 				gsw.addUnitOnPath(unit);
 			} else {
@@ -27,10 +26,6 @@ public class MovingBot implements Bot {
 				unit.setOrder(new Order(unit.getPath(), move + offset));
 			}
 		});
-
-
-//		moveFromBase(gsw, base);
-//		moveHorsemen(state, gsw);
 		return gsw;
 	}
 
