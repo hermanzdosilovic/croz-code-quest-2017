@@ -42,26 +42,26 @@ public class MovingBot implements Bot {
 
 		for (int i = 0; i < goldPath; i++) {
 			Unit unit = Unit.byType(UnitType.HORSEMAN);
-			unit.setOrder(new Order(CQPaths.GOLD, unit.getSpeed()));
-			gsw.addMovingUnit(unit);
+			unit.setOrder(new Order(CQPaths.GOLD, 0));
+			gsw.addUnitOnPath(unit);
 		}
 		for (int i = 0; i < cannonPath; i++) {
 			Unit unit = Unit.byType(UnitType.HORSEMAN);
-			unit.setOrder(new Order(CQPaths.GOLD, unit.getSpeed()));
-			gsw.addMovingUnit(unit);
+			unit.setOrder(new Order(CQPaths.CANNON, 0));
+			gsw.addUnitOnPath(unit);
 		}
 
 		Integer numberOfArchers = base.getNumberOfArchers();
 		for (int i = 0; i < numberOfArchers; i++) {
 			Unit unit = Unit.byType(UnitType.ARCHER);
-			unit.setOrder(new Order(CQPaths.SHORT, 5));
-			gsw.addMovingUnit(unit);
+			unit.setOrder(new Order(CQPaths.SHORT, 0));
+			gsw.addUnitOnPath(unit);
 		}
 		Integer numberOfSpearmen = base.getNumberOfSpearmen();
 		for (int i = 0; i < numberOfSpearmen; i++) {
 			Unit unit = Unit.byType(UnitType.SPEARMAN);
-			unit.setOrder(new Order(CQPaths.SHORT, 5));
-			gsw.addMovingUnit(unit);
+			unit.setOrder(new Order(CQPaths.SHORT, 0));
+			gsw.addUnitOnPath(unit);
 		}
 	}
 }
