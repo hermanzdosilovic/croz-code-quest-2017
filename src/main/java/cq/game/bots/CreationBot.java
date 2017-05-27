@@ -17,13 +17,13 @@ public class CreationBot implements Bot {
 	@Override
 	public GameStateWriter generateOrders(InputGameState state, GameStateWriter gsw) {
 		Integer gold = state.getMyBase().getGold();
-		double numOfH = Math.floor((gold * horsemenPercentage) % 100);
+		double numOfH = Math.floor((gold * horsemenPercentage) / 100);
 		for (int i = 0; i < numOfH; i++) {
 			System.err.println("Creating horseman");
 			Unit unit = Unit.byType(UnitType.HORSEMAN);
 			gsw.addUnitOnBuildQueue(unit);
 		}
-		double numOfA = Math.floor((gold * archerPercentage) % 100);
+		double numOfA = Math.floor((gold * archerPercentage) / 100);
 		for (int i = 0; i < numOfA; i++) {
 			System.err.println("Creating horseman");
 			Unit unit = Unit.byType(UnitType.ARCHER);
