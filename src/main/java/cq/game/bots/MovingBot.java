@@ -10,7 +10,6 @@ import cq.game.models.path.CQPaths;
 import java.util.List;
 
 /**
- *
  * Created by Fredi Šarić on 27.05.17..
  */
 public class MovingBot implements Bot {
@@ -18,7 +17,7 @@ public class MovingBot implements Bot {
 	@Override
 	public GameStateWriter generateOrders(InputGameState state, GameStateWriter gsw) {
 		BaseStats base = state.getMyBase();
-		moveFromBase(gsw, base);
+//		moveFromBase(gsw, base);
 		moveHorsemen(state, gsw);
 		return gsw;
 	}
@@ -26,12 +25,13 @@ public class MovingBot implements Bot {
 	private void moveHorsemen(InputGameState state, GameStateWriter gsw) {
 		List<Unit> movingUnits = state.getMovingUnits();
 		int maxOffseet = 100;
-		movingUnits.stream().filter(unit -> unit.getType() == UnitType.HORSEMAN).forEach(horsemen -> {
-			int offset = horsemen.getOffset();
-			int move = Math.min(horsemen.getSpeed(), maxOffseet - offset);
-			horsemen.setOrder(new Order(horsemen.getPath(), move + offset));
-			gsw.addMovingUnit(horsemen);
-		});
+		movingUnits.stream()
+			.forEach(horsemen -> {
+				int offset = horsemen.getOffset();
+				int move = Math.min(horsemen.getSpeed(), maxOffseet - offset);
+				horsemen.setOrder(new Order(horsemen.getPath(), move + offset));
+				gsw.addMovingUnit(horsemen);
+			});
 	}
 
 	private void moveFromBase(GameStateWriter gsw, BaseStats base) {
