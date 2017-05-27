@@ -2,7 +2,6 @@ package cq.game.simulation;
 
 import cq.game.models.Unit;
 import cq.game.models.enums.UnitType;
-import lombok.experimental.var;
 
 import java.util.List;
 
@@ -48,9 +47,9 @@ public class FightSimulation {
             double horsemen1r = Math.round(Math.min(survivors * horsemenrate / (archersrate + horsemenrate + spearmenrate), horsemen1));
             double spearmen1r = Math.round(Math.min(survivors * spearmenrate / (archersrate + horsemenrate + spearmenrate), spearmen1));
             if (archers1r + spearmen1r + horsemen1r == 0) {
-                var av = archers1 * archers1 * spearmen1 / horsemen2;
-                var hv = horsemen1 * horsemen1 * archers1 / spearmen2;
-                var sv = spearmen1 * spearmen1 * horsemen1 / archers2;
+                double av = archers1 * archers1 * spearmen1 / horsemen2;
+                double hv = horsemen1 * horsemen1 * archers1 / spearmen2;
+                double sv = spearmen1 * spearmen1 * horsemen1 / archers2;
                 if (av > hv && av > sv)
                     archers1r = 1;
                 if (hv > av && hv > sv)
@@ -76,9 +75,9 @@ public class FightSimulation {
             double horsemen2r = Math.round(Math.min(survivors * horsemenrate / (archersrate + horsemenrate + spearmenrate), horsemen2));
             double spearmen2r = Math.round(Math.min(survivors * spearmenrate / (archersrate + horsemenrate + spearmenrate), spearmen2));
             if (archers2r + spearmen2r + horsemen2r == 0) {
-                var av = archers2 * archers2 * spearmen2 / horsemen1;
-                var hv = horsemen2 * horsemen2 * archers2 / spearmen1;
-                var sv = spearmen2 * spearmen2 * horsemen2 / archers1;
+                double av = archers2 * archers2 * spearmen2 / horsemen1;
+                double hv = horsemen2 * horsemen2 * archers2 / spearmen1;
+                double sv = spearmen2 * spearmen2 * horsemen2 / archers1;
                 if (av > hv && av > sv)
                     archers2r = 1;
                 if (hv > av && hv > sv)
