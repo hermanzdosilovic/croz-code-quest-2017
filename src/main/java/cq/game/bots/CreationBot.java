@@ -11,8 +11,9 @@ import cq.game.models.enums.UnitType;
  */
 public class CreationBot implements Bot {
 
-	private static final double horsemenPercentage = 4/5.0;
-	private static final double archerPercentage = 1/5.0;
+	private static final double archerPercentage = 2/6.0;
+	private static final double spearmanPercentage = 1/6.0;
+	private static final double horsemenPercentage = 3/5.0;
 
 	@Override
 	public GameStateWriter generateOrders(InputGameState state, GameStateWriter gsw) {

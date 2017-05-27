@@ -9,7 +9,7 @@ public class Horseman extends Unit {
         super("horseman", 100);
         this.setType(UnitType.HORSEMAN);
 
-        this.setSpeed(15);
+        this.setSpeed(20);
 
         this.setPointFactor(8);
     }
