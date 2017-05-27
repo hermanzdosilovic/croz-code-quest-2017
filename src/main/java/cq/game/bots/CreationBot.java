@@ -25,7 +25,7 @@ public class CreationBot implements Bot {
 		}
 		double numOfA = Math.floor((gold * archerPercentage) / 100);
 		for (int i = 0; i < numOfA; i++) {
-			System.err.println("Creating horseman");
+			System.err.println("Creating archer");
 			Unit unit = Unit.byType(UnitType.ARCHER);
 			gsw.addUnitOnBuildQueue(unit);
 		}
